@@ -1,0 +1,22 @@
+{
+  "name": "ciphering-cli-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NedVill/Ciphering-CLI-tool.git"
+  },
+  "author": "NedVill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NedVill/Ciphering-CLI-tool/issues"
+  },
+  "homepage": "https://github.com/NedVill/Ciphering-CLI-tool#readme",
+  "dependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
