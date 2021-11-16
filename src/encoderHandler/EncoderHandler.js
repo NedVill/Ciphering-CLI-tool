@@ -34,7 +34,7 @@ class EncoderHandler {
       stderr.write(
         `Incorrect parameter value of config: "${this.pattern}", example: "XY(-)"`
       );
-      process.exit();
+      process.exit(9);
     }
   }
 

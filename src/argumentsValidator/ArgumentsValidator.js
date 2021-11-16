@@ -14,20 +14,22 @@ class ArgumentsValidator {
 
   validate() {
     if (this.isValidArguments) {
-      stderr.write(`Enter parameter: ${this.isValidArguments}`);
-      process.exit();
+      stderr.write(
+        `You should to enter the parameter: ${this.isValidArguments}`
+      );
+      process.exit(9);
     }
 
     if (!!this.duplicateNamingOfArgument) {
       stderr.write(
         `Found duplicate naming of argument: "${this.duplicateNamingOfArgument}"`
       );
-      process.exit();
+      process.exit(9);
     }
 
     if (!!this.duplicateArgument) {
       stderr.write(`Found duplicate argument: "${this.duplicateArgument}"`);
-      process.exit();
+      process.exit(9);
     }
   }
 

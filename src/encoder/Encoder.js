@@ -13,7 +13,7 @@ class Encoder {
   setParams(config) {
     if (!config) {
       stderr.write("Cryptor: config is required!");
-      process.exit();
+      process.exit(9);
     }
 
     this.params = config.split("-");
