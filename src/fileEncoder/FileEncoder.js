@@ -24,9 +24,9 @@ class FileEncoder {
   runPipeline(stream, destination) {
     pipeline(stream, this.transform, destination, (err) => {
       if (err) {
-        console.error("Pipeline failed.", err);
+        console.error("Encode filed.", err);
       } else {
-        console.log("Pipeline succeeded.");
+        console.log("Encode succeeded.");
       }
     });
   }
@@ -48,7 +48,7 @@ class FileEncoder {
     }
 
     if (this.outputFile && this.inputFile) {
-      this.runPipeline(this.inputFile, this.inputFile);
+      this.runPipeline(this.inputFile, this.outputFile);
     }
   }
 

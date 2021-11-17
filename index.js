@@ -1,5 +1,5 @@
 const { argv } = process;
-const { CipheringCLITool } = require("./src/cipheringCLITool/cipheringCLITool");
+const { CipheringTool } = require("./src/CipheringTool/CipheringTool");
 
-const app = new CipheringCLITool();
+const app = new CipheringTool();
 app.init(argv);

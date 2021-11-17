@@ -5,7 +5,7 @@ const {
 const { FileEncoder } = require("../fileEncoder/FileEncoder");
 const { nameOfparameters } = require("../constants/constants");
 
-class CipheringCLITool {
+class CipheringTool {
   arguments = [];
 
   argumentsValidator = new ArgumentsValidator();
@@ -80,4 +80,4 @@ class CipheringCLITool {
   }
 }
 
-module.exports.CipheringCLITool = CipheringCLITool;
+module.exports.CipheringTool = CipheringTool;
