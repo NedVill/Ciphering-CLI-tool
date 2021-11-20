@@ -1,3 +1,4 @@
+const { stderr } = process;
 const { EncoderHandler } = require("../encoderHandler/EncoderHandler");
 const {
   ArgumentsValidator,
@@ -76,6 +77,11 @@ class CipheringTool {
   }
 
   setArguments(args) {
+    if (!Array.isArray(args)) {
+      stderr.write("Incorrect parameter: you should to set an Array");
+      process.exit(9);
+    }
+
     this.arguments = args.slice(2);
   }
 }
