@@ -5,8 +5,12 @@ const {
   firstLetterNum,
 } = require("../../../constants/constants");
 
-const decode = (mainArr, step = 3) =>
-  mainArr
+const decode = (mainArr, step = 3) => {
+  if (!Array.isArray(mainArr)) {
+    throw new Error("you should to pass an Array param");
+  }
+
+  return mainArr
     .map((char) => {
       if (!checkIsLetter(char) || !checkIsLatin(char)) {
         return char;
@@ -26,5 +30,6 @@ const decode = (mainArr, step = 3) =>
       return isUpper ? decreasedChar.toUpperCase() : decreasedChar;
     })
     .join("");
+};
 
 module.exports.decode = decode;

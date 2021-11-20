@@ -1,18 +1,9 @@
 const { encode } = require("./utils/encode");
 const { decode } = require("./utils/decode");
+const { validation } = require("./utils/validation");
 
 const caesarCipher = (params) => {
-  if (typeof params !== "object") {
-    return "you need enter an object of params";
-  }
-
-  if (!params.string) {
-    return "you need to enter a string value";
-  }
-
-  if (!params.mode) {
-    return "you need to enter a mode";
-  }
+  validation(params);
 
   const charsArray = params.string.split("");
 

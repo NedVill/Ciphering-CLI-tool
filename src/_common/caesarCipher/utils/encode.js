@@ -5,8 +5,12 @@ const {
   firstLetterNum,
 } = require("../../../constants/constants");
 
-const encode = (mainArr, step = 3) =>
-  mainArr
+const encode = (mainArr, step = 3) => {
+  if (!Array.isArray(mainArr)) {
+    throw new Error("you should to pass an Array param");
+  }
+
+  return mainArr
     .map((char) => {
       if (!checkIsLetter(char) || !checkIsLatin(char)) {
         return char;
@@ -28,5 +32,6 @@ const encode = (mainArr, step = 3) =>
       return isUpper ? increasedChar.toUpperCase() : increasedChar;
     })
     .join("");
+};
 
 module.exports.encode = encode;
