@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "coverage": "jest test -- --coverage"
+  },
+  "jest": {
+    "coverageReporters": [
+      "html"
+    ]
   },
   "repository": {
     "type": "git",
@@ -18,5 +24,8 @@
   "homepage": "https://github.com/NedVill/Ciphering-CLI-tool#readme",
   "dependencies": {
     "nodemon": "^2.0.14"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
   }
 }
