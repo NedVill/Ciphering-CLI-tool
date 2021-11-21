@@ -4,34 +4,35 @@ const { runEncode } = require("./utils/runEncode");
 class Encoder {
   params = [];
 
-  encodedValue = "";
+  encodedString = "";
 
   init(config) {
     this.setParams(config);
   }
 
   setParams(config) {
-    if (!config) {
-      stderr.write("Cryptor: config is required!");
+    if (!config || typeof config !== "string") {
+      stderr.write("Encoder: config is required as string!");
       process.exit(9);
     }
 
     this.params = config.split("-");
   }
 
-  encode(string, index = 0) {
-    if (!this.params[index]) {
-      this.encodedValue = string;
-      return;
+  encode(string = "", index = 0) {
+    if (!this.params[index] || !string) {
+      this.encodedString = string;
+      return true;
     }
 
-    const param = this.params[index];
-
-    return this.encode(runEncode(param[0], param[1], string), index + 1);
+    return this.encode(
+      runEncode(this.params[index][0], this.params[index][1], string),
+      index + 1
+    );
   }
 
   get encodedValue() {
-    return this.encodedValue;
+    return this.encodedString;
   }
 }
 
