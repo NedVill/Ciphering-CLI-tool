@@ -1,4 +1,8 @@
 const validation = (params) => {
+  if (!params) {
+    throw new Error("you need enter an object of params");
+  }
+
   if (typeof params !== "object") {
     throw new Error("you need enter an object of params");
   }
