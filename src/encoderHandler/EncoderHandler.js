@@ -20,11 +20,25 @@ class EncoderHandler {
   string = "";
 
   encode(string) {
+    if (!string || typeof string !== "string") {
+      stderr.write(
+        "EncoderHandler encode: the parameter 'string' is required as string"
+      );
+      process.exit(9);
+    }
+
     this.setString(string);
     this.runEncode();
   }
 
   init(pattern) {
+    if (!pattern || typeof pattern !== "string") {
+      stderr.write(
+        "EncoderHandler encode: the parameter 'pattern' is required as string"
+      );
+      process.exit(9);
+    }
+
     this.pattern = pattern;
     this.validate();
   }
@@ -36,6 +50,8 @@ class EncoderHandler {
       );
       process.exit(9);
     }
+
+    return true;
   }
 
   setString(string) {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "coverage": "cross-env CI=true && npm test -- --coverage"
+    "coverage": "jest test -- --coverage"
   },
   "jest": {
     "coverageReporters": [

@@ -174,7 +174,7 @@ describe("CipheringTool handleArguments", () => {
     cipheringTool.arguments = [];
   });
 
-  it("call argumentsValidator.init", () => {
+  it("call", () => {
     cipheringTool.setArguments([
       "a",
       "b",
@@ -213,7 +213,7 @@ describe("CipheringTool handleArguments", () => {
     );
   });
 
-  it("call argumentsValidator.init", () => {
+  it("call", () => {
     cipheringTool.setArguments(["a", "b", "-c", "A1-R0"]);
 
     cipheringTool.handleArguments();

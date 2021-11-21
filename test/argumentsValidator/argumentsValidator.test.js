@@ -31,17 +31,23 @@ describe("ArgumentsValidator Tests", () => {
 
   it("Check duplicateArgument", () => {
     try {
-      validator.init(["-c", "R0-A", "-c"]);
+      validator.init(["-c", "C1-C1-A-R0", "-c", "C0"]);
     } catch (error) {
-      expect(error).toBe('Found duplicate argument: "-c"');
+      const isError = error.includes(
+        "Error: You provided argument more than once"
+      );
+      expect(error).toBeTruthy();
     }
   });
 
   it("Check duplicateNamingOfArgument", () => {
     try {
-      validator.init(["-c", "R0-A", "--config"]);
+      validator.init(["-c", "C1-C1-A-R0", "--config", "C0"]);
     } catch (error) {
-      expect(error).toBe('Found duplicate naming of argument: "--config"');
+      const isError = error.includes(
+        "Error: Found duplicate naming of argument:"
+      );
+      expect(isError).toBeTruthy();
     }
   });
 
@@ -49,12 +55,15 @@ describe("ArgumentsValidator Tests", () => {
     try {
       validator.init(["-o"]);
     } catch (error) {
-      expect(error).toBe("You should to enter the parameter: -c");
+      const isError = error.includes(
+        "Error: You should to enter the parameter:"
+      );
+      expect(isError).toBeTruthy();
     }
   });
 });
 
-describe("ArgumentsValidator Tests", () => {
+describe("ArgumentsValidator exit", () => {
   beforeEach(() => {
     process.stderr.write = jest.fn((arg) => {
       return arg;
@@ -67,7 +76,6 @@ describe("ArgumentsValidator Tests", () => {
 
   afterEach(() => {
     process.exit = realProcess.exit;
-    process.stderr.write = realProcess.stderr.write;
   });
 
   it("Check incorrect array", () => {

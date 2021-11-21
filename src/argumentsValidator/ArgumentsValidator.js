@@ -20,20 +20,22 @@ class ArgumentsValidator {
   validate() {
     if (!!this.isValidArguments) {
       stderr.write(
-        `You should to enter the parameter: ${this.isValidArguments}`
+        `Error: You should to enter the parameter: ${this.isValidArguments}`
       );
       process.exit(9);
     }
 
     if (!!this.duplicateNamingOfArgument) {
       stderr.write(
-        `Found duplicate naming of argument: "${this.duplicateNamingOfArgument}"`
+        `Error: Found duplicate naming of argument: "${this.duplicateNamingOfArgument}"`
       );
       process.exit(9);
     }
 
     if (!!this.duplicateArgument) {
-      stderr.write(`Found duplicate argument: "${this.duplicateArgument}"`);
+      stderr.write(
+        `Error: You provided ${this.duplicateArgument} argument more than once`
+      );
       process.exit(9);
     }
   }

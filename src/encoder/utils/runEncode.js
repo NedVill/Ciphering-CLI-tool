@@ -8,11 +8,6 @@ const runEncode = (params) => {
     process.exit(9);
   }
 
-  if (params.mode === undefined) {
-    stderr.write("runEncode: mode is required!");
-    process.exit(9);
-  }
-
   if (!params.string || typeof params.string !== "string") {
     stderr.write("runEncode: string is required as string!");
     process.exit(9);
