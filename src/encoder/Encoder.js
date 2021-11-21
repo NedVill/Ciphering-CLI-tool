@@ -26,7 +26,11 @@ class Encoder {
     }
 
     return this.encode(
-      runEncode(this.params[index][0], this.params[index][1], string),
+      runEncode({
+        method: this.params[index][0],
+        mode: this.params[index][1],
+        string: string,
+      }),
       index + 1
     );
   }

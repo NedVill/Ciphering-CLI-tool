@@ -48,7 +48,7 @@ class EncoderHandler {
   }
 
   get outputValue() {
-    return this.encoder.encodedValue;
+    return this.encoder.encodedString;
   }
 }
 

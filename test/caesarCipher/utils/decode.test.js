@@ -21,12 +21,11 @@ describe("Caesar Decoder Tests", () => {
     );
   });
 
-  // it("argument is not array", () => {
-  //   try {
-  //     decode();
-  //   } catch (e) {
-  //     console.log(e.message);
-  //     decode(e.message).toBe("you should to pass an Array param");
-  //   }
-  // });
+  it("argument is not array", () => {
+    try {
+      decode();
+    } catch (e) {
+      expect(e.message).toBe("you should to pass an Array param");
+    }
+  });
 });

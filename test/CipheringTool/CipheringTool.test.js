@@ -1,13 +1,13 @@
 const { CipheringTool } = require("../../src/CipheringTool/CipheringTool");
 
 const realProcess = process;
-const cipheringTool = new CipheringTool();
-
 const mockCallback = jest.fn((arg) => {
   return arg;
 });
 
 describe("CipheringTool Vars Tests", () => {
+  const cipheringTool = new CipheringTool();
+
   it("Check default params", () => {
     expect(cipheringTool.arguments).toStrictEqual([]);
     expect(typeof cipheringTool.argumentsValidator).toBe("object");
@@ -27,6 +27,8 @@ describe("CipheringTool Vars Tests", () => {
 });
 
 describe("CipheringTool Tests", () => {
+  const cipheringTool = new CipheringTool();
+
   beforeEach(() => {
     cipheringTool.argumentsValidator.init = mockCallback;
     cipheringTool.encoderHandler.init = mockCallback;
@@ -83,7 +85,32 @@ describe("CipheringTool Tests", () => {
   });
 });
 
+describe("CipheringTool exit", () => {
+  const cipheringTool = new CipheringTool();
+
+  beforeEach(() => {
+    process.exit = jest.fn((arg) => {
+      throw arg;
+    });
+  });
+
+  afterEach(() => {
+    process.exit = realProcess.exit;
+    jest.clearAllMocks();
+  });
+
+  it("check setArguments without parameters", () => {
+    try {
+      cipheringTool.setArguments();
+    } catch (error) {
+      expect(error).toBe(9);
+    }
+  });
+});
+
 describe("CipheringTool setArguments", () => {
+  const cipheringTool = new CipheringTool();
+
   beforeEach(() => {
     process.stderr.write = jest.fn((arg) => {
       throw arg;
@@ -111,6 +138,8 @@ describe("CipheringTool setArguments", () => {
 });
 
 describe("CipheringTool init", () => {
+  const cipheringTool = new CipheringTool();
+
   beforeEach(() => {
     cipheringTool.argumentsValidator.init = jest.fn();
     cipheringTool.setArguments = jest.fn();
@@ -128,5 +157,89 @@ describe("CipheringTool init", () => {
     expect(cipheringTool.setArguments.mock.calls.length).toBe(1);
     expect(cipheringTool.handleArguments.mock.calls.length).toBe(1);
     expect(cipheringTool.runEncode.mock.calls.length).toBe(1);
+  });
+});
+
+describe("CipheringTool handleArguments", () => {
+  const cipheringTool = new CipheringTool();
+
+  beforeEach(() => {
+    cipheringTool.parametersKeysOfHandlers.config = jest.fn((param) => param);
+    cipheringTool.parametersKeysOfHandlers.input = jest.fn((param) => param);
+    cipheringTool.parametersKeysOfHandlers.output = jest.fn((param) => param);
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+    cipheringTool.arguments = [];
+  });
+
+  it("call argumentsValidator.init", () => {
+    cipheringTool.setArguments([
+      "a",
+      "b",
+      "-c",
+      "A1-R0",
+      "-i",
+      "./input.txt",
+      "-o",
+      "./output.txt",
+    ]);
+
+    cipheringTool.handleArguments();
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.config.mock.calls.length
+    ).toBe(1);
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.config.mock.calls[0][0]
+    ).toStrictEqual("A1-R0");
+
+    expect(cipheringTool.parametersKeysOfHandlers.input.mock.calls.length).toBe(
+      1
+    );
+
+    expect(cipheringTool.parametersKeysOfHandlers.input.mock.calls[0][0]).toBe(
+      "./input.txt"
+    );
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.output.mock.calls.length
+    ).toBe(1);
+
+    expect(cipheringTool.parametersKeysOfHandlers.output.mock.calls[0][0]).toBe(
+      "./output.txt"
+    );
+  });
+
+  it("call argumentsValidator.init", () => {
+    cipheringTool.setArguments(["a", "b", "-c", "A1-R0"]);
+
+    cipheringTool.handleArguments();
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.config.mock.calls.length
+    ).toBe(1);
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.config.mock.calls[0][0]
+    ).toStrictEqual("A1-R0");
+
+    expect(cipheringTool.parametersKeysOfHandlers.input.mock.calls.length).toBe(
+      1
+    );
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.input.mock.calls[0][0]
+    ).toBe();
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.output.mock.calls.length
+    ).toBe(1);
+
+    expect(
+      cipheringTool.parametersKeysOfHandlers.output.mock.calls[0][0]
+    ).toBe();
   });
 });
